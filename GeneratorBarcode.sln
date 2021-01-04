@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratorBarcode", "GeneratorBarcode\GeneratorBarcode.csproj", "{3212907F-A051-413F-9492-04FEE3447BAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratorBarcode.Test", "GeneratorBarcode.Test\GeneratorBarcode.Test.csproj", "{7ABA5653-B07B-467B-AD04-189F108C4C09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3212907F-A051-413F-9492-04FEE3447BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3212907F-A051-413F-9492-04FEE3447BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3212907F-A051-413F-9492-04FEE3447BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3212907F-A051-413F-9492-04FEE3447BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ABA5653-B07B-467B-AD04-189F108C4C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ABA5653-B07B-467B-AD04-189F108C4C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ABA5653-B07B-467B-AD04-189F108C4C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ABA5653-B07B-467B-AD04-189F108C4C09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFB908AF-051F-401A-9683-665F1B8E92AA}
+	EndGlobalSection
+EndGlobal
