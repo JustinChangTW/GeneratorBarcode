@@ -53,7 +53,7 @@ namespace GeneratorBarcode.Domain
         /// <param name="suffix_code">後置碼三碼(I0F、I01)</param>
         /// <param name="create_datetime">下單日</param>
         /// <param name="premium">保費</param>
-        public string[] GetBarcode(string order_seq, string suffix_code, DateTime create_datetime, decimal premium)
+        public List<string> GetBarcode(string order_seq, string suffix_code, DateTime create_datetime, decimal premium)
         {
             OrderSeq = order_seq;
             SuffixCode = suffix_code;
@@ -63,9 +63,9 @@ namespace GeneratorBarcode.Domain
             return GetBarcode();
         }
 
-        public string[] GetBarcode()
+        public List<string> GetBarcode()
         {
-            string[] result = { "", "", "" };
+            List<string> result = new List<string>();
             int i = 0;
             foreach(var item in Draft)
             {
@@ -90,11 +90,11 @@ namespace GeneratorBarcode.Domain
                         else 
                             stringBuilder.Append(item[j]);
                     }
-                    result[i] = stringBuilder.ToString();      
+                    result.Add(stringBuilder.ToString());      
                 }
                 else
                 {
-                    result[i] = string.Join("", item);
+                    result.Add(string.Join("", item));
                 }
                 
 

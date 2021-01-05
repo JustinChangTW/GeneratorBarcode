@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GeneratorBarcode.Domain;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace GeneratorBarcode.Test
 {
@@ -183,10 +184,10 @@ namespace GeneratorBarcode.Test
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
-            string[] result = cs.GetBarcode();
+            List<string> result = cs.GetBarcode();
 
             //actual
-            string[] acutal = {"080416906","9999999999031600","040949000011700"};
+            List<string> acutal = new List<string>{"080416906","9999999999031600","040949000011700"};
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -203,10 +204,10 @@ namespace GeneratorBarcode.Test
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
-            string[] result = cs.GetBarcode();
+            List<string> result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "080416906", "5099999999031600", "0409AX000011700" };
+            List<string> acutal = new List<string>{ "080416906", "5099999999031600", "0409AX000011700" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -223,10 +224,10 @@ namespace GeneratorBarcode.Test
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
-            string[] result = cs.GetBarcode();
+            List<string> result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "080416906", "5008699999031600", "0409BY000011700" };
+            List<string> acutal = new List<string>{ "080416906", "5008699999031600", "0409BY000011700" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -243,10 +244,10 @@ namespace GeneratorBarcode.Test
                     DateTime.Parse("2018-07-28 10:46:00"),
                     4628);
             //act
-            string[] result = cs.GetBarcode();
+            List<string> result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "070813906", "9621807287219489", "220182000004628" };
+            List<string> acutal = new List<string>{ "070813906", "9621807287219489", "220182000004628" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -261,12 +262,12 @@ namespace GeneratorBarcode.Test
             //arrange
             var cs = new ConvenienceStoreBarcode();
             //act
-            string[] result = cs.GetBarcode("ZWB18072872194892201", "I0F",
+            List<string> result = cs.GetBarcode("ZWB18072872194892201", "I0F",
                     DateTime.Parse("2018-07-28 10:46:00"),
                     4628);
 
             //actual
-            string[] acutal = { "070813906", "9621807287219489", "220182000004628" };
+            List<string> acutal = new List<string> { "070813906", "9621807287219489", "220182000004628" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
