@@ -105,43 +105,45 @@ namespace GeneratorBarcode.Domain
 
         public void CreateDraft()
         {
-            int[] i;
-            string[] s;
-            (i, s) = GeneratorOne();
-            DraftInt.Add(i);
-            DraftString.Add(s);
+            Tuple<int[], string[]> tuple;
+            tuple = GeneratorOne();
+            DraftInt.Add(tuple.Item1);
+            DraftString.Add(tuple.Item2);
 
-            (i, s) = GeneratorTwo();
-            DraftInt.Add(i);
-            DraftString.Add(s);
+            tuple = GeneratorTwo();
+            DraftInt.Add(tuple.Item1);
+            DraftString.Add(tuple.Item2);
 
-            (i, s) = GeneratorThree();
-            DraftInt.Add(i);
-            DraftString.Add(s);
+            tuple = GeneratorThree();
+            DraftInt.Add(tuple.Item1);
+            DraftString.Add(tuple.Item2);
         }
 
-        public (int[],string[]) GeneratorOne()
+        public Tuple<int[],string[]> GeneratorOne()
         {
             string temp = PaymentDeadlineChinese.Substring(2, 6) + SuffixCode;
             int[] result = temp.Select(x =>LetterToNumber(x)).ToArray();
             string[] resultS = temp.Select(x => x.ToString()).ToArray();
-            return (result,resultS);
+            Tuple<int[], string[]> tuple = new Tuple<int[], string[]>(result, resultS);
+            return tuple;
         }
 
-        public (int[], string[]) GeneratorTwo()
+        public Tuple<int[], string[]> GeneratorTwo()
         {
             string temp = OrderSeq.Substring(0, 16);
             int[] result = temp.Select(x => LetterToNumber(x)).ToArray();
             string[] resultS = temp.Select(x => x.ToString()).ToArray();
-            return (result, resultS);
+            Tuple<int[], string[]> tuple = new Tuple<int[], string[]>(result, resultS);
+            return tuple;
         }
 
-        public (int[], string[]) GeneratorThree()
+        public Tuple<int[], string[]> GeneratorThree()
         {
             string temp = OrderSeq.Substring(16, 4) + "00" + Premium.ToString("000000000");
             int[] result = temp.Select(x => LetterToNumber(x)).ToArray();
             string[] resultS = temp.Select(x => x.ToString()).ToArray();
-            return (result, resultS);
+            Tuple<int[], string[]> tuple = new Tuple<int[], string[]>(result, resultS);
+            return tuple;
         }
 
         private int LetterToNumber(char letter)
