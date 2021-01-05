@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GeneratorBarcode.Domain;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace GeneratorBarcode.Test
 {
@@ -67,15 +68,14 @@ namespace GeneratorBarcode.Test
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
-            int[] result = cs.GeneratorOne();
+            (int[] resultInt,string[] resultString) = cs.GeneratorOne();
 
             //assert
-            int[] actual = { 0, 8, 0, 4, 1, 6, 9, 0, 6 };
+            (int[] actualInt,string[] actualString) = Tuple.Create(new int[]{0, 8, 0, 4, 1, 6, 9, 0, 6 },new string[]{ "0", "8", "0", "4", "1", "6", "I", "0", "F" });
 
-            result.SequenceEqual(actual);
-            for (int i = 0; i < actual.Length; i++)
+            for (int i = 0; i < actualInt.Length; i++)
             {
-                Assert.AreEqual(result[i], actual[i]);
+                Assert.AreEqual(resultInt[i], resultInt[i]);
             }
 
         }
@@ -89,14 +89,16 @@ namespace GeneratorBarcode.Test
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
-            int[] result = cs.GeneratorTwo();
+            (int[] resultInt, string[] resultString) = cs.GeneratorTwo();
 
             //assert
-            int[] actual = { 9 , 9  , 9 ,  9  , 9  , 9 ,  9 ,  9 ,  9 ,  9  , 0 ,  3 ,  1 ,  6 ,  0  , 0 };
+            (int[] actualInt, string[] actualString) = Tuple.Create(
+                new int[] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 0, 3, 1, 6, 0, 0 }, 
+                new string[] {"9", "9", "9", "9", "9", "9", "9", "9", "9", "9", "0", "3", "1", "6", "0", "0"});
 
-            for(int i = 0; i < actual.Length; i++)
+            for(int i = 0; i < actualInt.Length; i++)
             {
-                Assert.AreEqual(result[i], actual[i]);
+                Assert.AreEqual(resultInt[i], actualInt[i]);
             }
 
         }
@@ -111,15 +113,15 @@ namespace GeneratorBarcode.Test
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
-            int[] result = cs.GeneratorThree();
+            (int[] resultInt, string[] resultString) = cs.GeneratorThree();
 
             //assert
             int[] actual = { 0 , 4  , 0 ,  9  , 0 ,  0  , 0 ,  0  , 0 ,  0 ,  1 ,  1 ,  7,   0 ,  0 };
 
-            result.SequenceEqual(actual);
-            for (int i = 0; i < actual.Length; i++)
+            resultInt.SequenceEqual(actual);
+            for (int i = 0; i < resultInt.Length; i++)
             {
-                Assert.AreEqual(result[i], actual[i]);
+                Assert.AreEqual(resultInt[i], actual[i]);
             }
 
         }
@@ -186,7 +188,7 @@ namespace GeneratorBarcode.Test
             string[] result = cs.GetBarcode();
 
             //actual
-            string[] acutal = {"080416906","9999999999031600","040949000011700"};
+            string[] acutal = { "080416I0F", "9999999999031600","040949000011700"};
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -206,7 +208,7 @@ namespace GeneratorBarcode.Test
             string[] result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "080416906", "5099999999031600", "0409AX000011700" };
+            string[] acutal = { "080416I0F", "5099999999031600", "0409AX000011700" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -226,7 +228,7 @@ namespace GeneratorBarcode.Test
             string[] result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "080416906", "5008699999031600", "0409BY000011700" };
+            string[] acutal = { "080416I0F", "5008699999031600", "0409BY000011700" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -246,7 +248,7 @@ namespace GeneratorBarcode.Test
             string[] result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "070813906", "9621807287219489", "220182000004628" };
+            string[] acutal = { "070813I0F", "ZWB1807287219489", "220182000004628" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -266,7 +268,7 @@ namespace GeneratorBarcode.Test
                     4628);
 
             //actual
-            string[] acutal = { "070813906", "9621807287219489", "220182000004628" };
+            string[] acutal = { "070813I0F", "ZWB1807287219489", "220182000004628" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);

@@ -12,7 +12,8 @@ namespace GeneratorBarcode.Domain
         public string SuffixCode { get; set; }
         public DateTime CreateDateTime { get; set; }
         public decimal Premium { get; set; }
-        public List<int[]> Draft { get; set; } = new List<int[]>();
+        public List<int[]> DraftInt { get; set; } = new List<int[]>();
+        public List<string[]> DraftString { get; set; } = new List<string[]>();
 
         public int[] CheckCode 
         {
@@ -67,37 +68,15 @@ namespace GeneratorBarcode.Domain
         {
             string[] result = { "", "", "" };
             int i = 0;
-            foreach(var item in Draft)
+            foreach(var item in DraftString)
             {
                 //第三個條碼要帶入檢查碼
                 if (i == 2)
                 {
-                    item[4] = CheckCode[0];
-                    item[5] = CheckCode[1];
-                    //result[i] = string.Join("", item);
-                    //result[i] = result[i].Substring(0, 3);
-                    StringBuilder stringBuilder = new StringBuilder("");
-                    for (int j = 0; j < item.Length; j++)
-                    {
-                        if (j == 4 && item[j] == 0)
-                            stringBuilder.Append("A");
-                        else if (j == 4 && item[j] == 10) 
-                            stringBuilder.Append("B");
-                        else if (j == 5 && item[j] == 0) 
-                            stringBuilder.Append("X");
-                        else if (j == 5 && item[j] == 10) 
-                            stringBuilder.Append("Y");
-                        else 
-                            stringBuilder.Append(item[j]);
-                    }
-                    result[i] = stringBuilder.ToString();      
+                    item[4] = CheckCode[0] == 0 ? "A" : CheckCode[0] == 10 ? "B" : CheckCode[0].ToString();
+                    item[5] = CheckCode[1] == 0 ? "X" : CheckCode[1] == 10 ? "Y" : CheckCode[1].ToString();    
                 }
-                else
-                {
-                    result[i] = string.Join("", item);
-                }
-                
-
+                result[i] = string.Join("", item);
                 i++;
             }
             return result;
@@ -114,7 +93,7 @@ namespace GeneratorBarcode.Domain
         private int GetEvenOrOddSum(int index)
         {
             int total = 0;
-            foreach (var item in Draft)
+            foreach (var item in DraftInt)
             {
                 for (int i = index; i < item.Length; i = i + 2)
                 {
@@ -126,30 +105,43 @@ namespace GeneratorBarcode.Domain
 
         public void CreateDraft()
         {
-            Draft.Add(GeneratorOne());
-            Draft.Add(GeneratorTwo());
-            Draft.Add(GeneratorThree());
+            int[] i;
+            string[] s;
+            (i, s) = GeneratorOne();
+            DraftInt.Add(i);
+            DraftString.Add(s);
+
+            (i, s) = GeneratorTwo();
+            DraftInt.Add(i);
+            DraftString.Add(s);
+
+            (i, s) = GeneratorThree();
+            DraftInt.Add(i);
+            DraftString.Add(s);
         }
 
-        public int[] GeneratorOne()
+        public (int[],string[]) GeneratorOne()
         {
             string temp = PaymentDeadlineChinese.Substring(2, 6) + SuffixCode;
             int[] result = temp.Select(x =>LetterToNumber(x)).ToArray();
-            return result;
+            string[] resultS = temp.Select(x => x.ToString()).ToArray();
+            return (result,resultS);
         }
 
-        public int[] GeneratorTwo()
+        public (int[], string[]) GeneratorTwo()
         {
             string temp = OrderSeq.Substring(0, 16);
             int[] result = temp.Select(x => LetterToNumber(x)).ToArray();
-            return result;
+            string[] resultS = temp.Select(x => x.ToString()).ToArray();
+            return (result, resultS);
         }
 
-        public int[] GeneratorThree()
+        public (int[], string[]) GeneratorThree()
         {
             string temp = OrderSeq.Substring(16, 4) + "00" + Premium.ToString("000000000");
             int[] result = temp.Select(x => LetterToNumber(x)).ToArray();
-            return result;
+            string[] resultS = temp.Select(x => x.ToString()).ToArray();
+            return (result, resultS);
         }
 
         private int LetterToNumber(char letter)
