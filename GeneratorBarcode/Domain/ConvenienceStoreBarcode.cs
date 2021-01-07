@@ -10,7 +10,6 @@ namespace GeneratorBarcode.Domain
     {
         public string OrderSeq { get; set; }
         public string SuffixCode { get; set; }
-        public DateTime CreateDateTime { get; set; }
         public decimal Premium { get; set; }
         public List<int[]> DraftInt { get; set; } = new List<int[]>();
         public List<string[]> DraftString { get; set; } = new List<string[]>();
@@ -19,10 +18,7 @@ namespace GeneratorBarcode.Domain
         {
             get { return CreateCheckCode();}
         }
-        public DateTime PaymentDeadline
-        {
-            get { return GetPaymentDeadline(CreateDateTime); }
-        }
+        public DateTime PaymentDeadline { get; set; }
 
         public String PaymentDeadlineChinese
         {
@@ -36,13 +32,13 @@ namespace GeneratorBarcode.Domain
         /// </summary>
         /// <param name="order_seq">訂單號碼</param>
         /// <param name="suffix_code">後置碼三碼(I0F、I01)</param>
-        /// <param name="create_datetime">下單日</param>
+        /// <param name="payment_deadline">繳費截止日</param>
         /// <param name="premium">保費</param>
-        public ConvenienceStoreBarcode(string order_seq,string suffix_code, DateTime create_datetime,decimal premium)
+        public ConvenienceStoreBarcode(string order_seq,string suffix_code, DateTime payment_deadline,decimal premium)
         {
             OrderSeq = order_seq;
             SuffixCode = suffix_code;
-            CreateDateTime = create_datetime;
+            PaymentDeadline = payment_deadline;
             Premium = premium;
             CreateDraft();
         }
@@ -52,13 +48,13 @@ namespace GeneratorBarcode.Domain
         /// </summary>
         /// <param name="order_seq">訂單號碼</param>
         /// <param name="suffix_code">後置碼三碼(I0F、I01)</param>
-        /// <param name="create_datetime">下單日</param>
+        /// <param name="payment_deadline">繳費截止日</param>
         /// <param name="premium">保費</param>
-        public string[] GetBarcode(string order_seq, string suffix_code, DateTime create_datetime, decimal premium)
+        public string[] GetBarcode(string order_seq, string suffix_code, DateTime payment_deadline, decimal premium)
         {
             OrderSeq = order_seq;
             SuffixCode = suffix_code;
-            CreateDateTime = create_datetime;
+            PaymentDeadline = payment_deadline;
             Premium = premium;
             CreateDraft();
             return GetBarcode();

@@ -135,7 +135,7 @@ namespace GeneratorBarcode.Test
                     11700);
             var result = cs.CheckCode;
 
-            int[] acutal = { 4, 9 };
+            int[] acutal = { 6, 3 };
 
             result.SequenceEqual(acutal);
 
@@ -147,7 +147,7 @@ namespace GeneratorBarcode.Test
         public void 取得檢查碼_餘數為0()
         {
             //arrange
-            var cs = new ConvenienceStoreBarcode("50999999990316000409", "I0F",
+            var cs = new ConvenienceStoreBarcode("30949999990316000409", "I0F",
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             var result = cs.CheckCode;
@@ -164,7 +164,7 @@ namespace GeneratorBarcode.Test
         public void 取得檢查碼_餘數為10()
         {
             //arrange
-            var cs = new ConvenienceStoreBarcode("50086999990316000409", "I0F",
+            var cs = new ConvenienceStoreBarcode("30036999990316000409", "I0F",
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             var result = cs.CheckCode;
@@ -182,7 +182,7 @@ namespace GeneratorBarcode.Test
         {
             //arrange
             var cs = new ConvenienceStoreBarcode("99999999990316000409", "I0F",
-                    DateTime.Parse("2019-03-31 13:09:09.910"),
+                    DateTime.Parse("2019-04-16 13:09:09.910"),
                     11700);
             //act
             string[] result = cs.GetBarcode();
@@ -201,14 +201,14 @@ namespace GeneratorBarcode.Test
         public void 取得條碼資料_檢核碼餘數為0()
         {
             //arrange
-            var cs = new ConvenienceStoreBarcode("50999999990316000409", "I0F",
+            var cs = new ConvenienceStoreBarcode("30949999990316000409", "I0F",
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
             string[] result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "080416I0F", "5099999999031600", "0409AX000011700" };
+            string[] acutal = { "080331I0F", "3094999999031600", "0409AX000011700" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -221,14 +221,14 @@ namespace GeneratorBarcode.Test
         public void 取得條碼資料_檢核碼餘數為10()
         {
             //arrange
-            var cs = new ConvenienceStoreBarcode("50086999990316000409", "I0F",
+            var cs = new ConvenienceStoreBarcode("30036999990316000409", "I0F",
                     DateTime.Parse("2019-03-31 13:09:09.910"),
                     11700);
             //act
             string[] result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "080416I0F", "5008699999031600", "0409BY000011700" };
+            string[] acutal = { "080331I0F", "3003699999031600", "0409BY000011700" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -248,7 +248,7 @@ namespace GeneratorBarcode.Test
             string[] result = cs.GetBarcode();
 
             //actual
-            string[] acutal = { "070813I0F", "ZWB1807287219489", "220182000004628" };
+            string[] acutal = { "070728I0F", "ZWB1807287219489", "220196000004628" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
@@ -268,7 +268,7 @@ namespace GeneratorBarcode.Test
                     4628);
 
             //actual
-            string[] acutal = { "070813I0F", "ZWB1807287219489", "220182000004628" };
+            string[] acutal = { "070728I0F", "ZWB1807287219489", "220196000004628" };
 
             result.SequenceEqual(acutal);
             Assert.AreEqual(result[0], acutal[0]);
