@@ -277,6 +277,29 @@ namespace GeneratorBarcode.Test
 
         }
 
+        [TestMethod]
+        public void 取得條碼資料_使用方法取_測試資料_URL範例()
+        {
+            //url
+            https://officialpayment.hotains.com.tw/MarketBarcode?info=S%2B21TquhoTBh5rhty6wh4/uVMHlovWcRtBrDmBGM%2BkH39xXuA21GC5lB3cJIaWr1cpqAC8U0N0j8qqoGQUv0lFUkxYTztphYUyA3Z1g6UKeZ1T/Yhvt7aZEX9Id9XzZAKp4xrYMZ9/X0WiCG%2BNjDdhDss3Ukk07XCAJN8WjkgXHUpa5DLyNkwH4gf47vB8dtTkhKHtsiKKKnT2wBiLkUYCYnjy9zEP5tc3xRJh6dsK3%2Bdv7MJnZXpEniHxSRsJgRMmbNWHFCVazlznlpn7ui5PnNnQN/eBQ9wSGehkjN4zswJjvpFDwBpRTyoLCSm%2BNtPkZBeewecop/XnSOVJWIJLo9WogDK0Ka%2B0Fk4TLGCatIrkNt18vM6%2BmN1uDbyIgwO4xaGUmRF%2BS/qarGkKbGAwDDfXOLYAYr3d6XNF%2Bv4srY/qSY0Bc/2Br/dbv5ErSEGweu6KU/0yUwJo951D2cqvy4tzmM2OxTZO9kwCfuDufvlOwYYlmAQvM1gVHP6x/I
+
+            //arrange
+            var cs = new ConvenienceStoreBarcode();
+            //act
+            string[] result = cs.GetBarcode("V9903049608440024032", "I01",
+                    DateTime.Parse("2020-12-06"),
+                    13815);
+
+            //actual
+            string[] acutal = { "091206I01", "V990304960844002", "403253000013815" };
+
+            result.SequenceEqual(acutal);
+            Assert.AreEqual(result[0], acutal[0]);
+            Assert.AreEqual(result[1], acutal[1]);
+            Assert.AreEqual(result[2], acutal[2]);
+
+        }
+
 
     }
 }
